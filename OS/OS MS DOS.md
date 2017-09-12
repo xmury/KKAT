@@ -1,4 +1,5 @@
-OS MS DOS
+#OS MS DOS
+
 DOS (Dick operation system) - не графическая ОС с интерфесом командной строки.
 
 Структура DOS
