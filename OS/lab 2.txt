@@ -1,0 +1,17 @@
+1. cd\
+2. dir Temp
+3. md rabota
+4. cd rabota
+5. md new
+6. echo Text > primer.txt
+7. copy primer.txt C:\rabota\trib.txt
+8. copy primer.txt + C:\rabota\trib.txt C:\rabota\new\nov.txt
+9. type nov.txts
+10. echo - Инесса Михайловна посмотрите пожалуйста.
+11. echo - Молодец Андрей, всё правильно
+12. cd\
+13. date
+14. time
+15. systeminfo.exe
+16. cls
+17. rmdir /S rabota 

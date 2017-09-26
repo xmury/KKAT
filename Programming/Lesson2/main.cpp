@@ -28,6 +28,51 @@ int metall_list(){
     // cout << a << "|" << b << "|" << h << endl;
 }
 
+int work_time(){
+    int time, hours_work, minutes_work;
+    int h1, h2, min1, min2;
+
+    cout << "Вы начали работать в (чч мм):"; cin >> h1 >> min1; cout << endl;
+    cout << "Вы закончили работать в (чч мм):"; cin >> h2 >> min2; cout << endl;
+
+    time = (h2 * 60 + min2) - (h1 * 60 + min1);
+    hours_work = time / 60;
+    minutes_work = time % 60;
+
+    cout << "Вы работали: " << hours_work << " : " << minutes_work << endl;
+    }
+
+int garden(){
+    int height, weight, vasya;
+    int P, colvo_vasy;
+
+    cout << "Введите длину и ширину вашего участка в метрах:" << endl;
+    cin >> height >> weight;
+    cout << "Введите ширину доски: " << endl;
+    cin >> vasya;
+    cout << height;
+    P = (height*2 + weight*2)*100;
+    cout << P;
+    colvo_vasy = P/vasya;
+
+    if (P%vasya > 0){colvo_vasy += 1;}
+
+    cout << "Вам потребуется следующее число досок:" << colvo_vasy << endl;
+}
+
+int shop(){
+    const int PRICE = 8, WIDTH = 80;
+    int height;
+    double full_price, S;
+
+    cout << "Введите длину отреза ткани: "; cin >> height;
+
+    S = height * WIDTH;
+    full_price = S*PRICE;
+
+    cout << "Стоимость вашей ткани: " << full_price << endl;
+}
+
 int main()
 {
     setlocale(LC_ALL, "Russian");
@@ -36,17 +81,25 @@ int main()
         int n;
         cout << " 1: а в 6-ой" << endl;
         cout << " 2: Металические листы" << endl;
-        cout << " 3: Резерв" << endl;
+        cout << " 3: Время работы" << endl;
+        cout << " 4: Поставить забор" << endl;
 
+        cout << " 0: Выход из программы" << endl;
         cin >> n;
 
-        if(n == 1){
-            a_in_six(); break;
-        }
-        if (n == 2){
-            metall_list(); break;
-        }
-        if (n != 1 && n != 2 && n != 3){
+        if (n == 1){a_in_six();}
+        if (n == 2){metall_list();}
+        if (n == 3){work_time();}
+        if (n == 4){garden();}
+
+        if (n == 0){ break;}
+
+        if (n != 1 &&
+            n != 2 &&
+            n != 3 &&
+            n != 4 &&
+            n != 'e')
+        {
             continue;
         }
     }

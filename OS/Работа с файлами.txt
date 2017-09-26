@@ -1,0 +1,26 @@
+Работа с файлами
+
+D:
+md WORK
+cd WORK
+echo Я > AFI.txt
+echo учусь > MFI.txt
+echo в > FIL.txt
+echo ККАТ > FILE.txt
+copy AFI.txt+MFI.txt+FIL.txt+FILE.txt COMMON.txt
+type COMMON.txt
+dir FI*.txt
+dir ?FI.txt
+del AFI.txt
+md SUBWORK
+copy FI*.txt \SUBWORK\
+atrib.exe +R \SUBWORK\*.*
+del \SUBWORK\FILE.txt
+atrib.exe -R \SUBWORK*.*
+dir /?
+dir /O:D
+rmdir /S SUBWORK
+cd ..
+rmdir /S \WORK
+
+Контрольные вопросы:
