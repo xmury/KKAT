@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1505731210 source:c:\users\xmur\documents\github\kkat\programming\s_circle\main.cpp
+	<iostream>
+	<math.h>
+
