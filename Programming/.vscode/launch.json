@@ -2,6 +2,19 @@
         "version": "0.2.0",
         "configurations": [
             {
+                "name": "(gdb) Bash on Windows Attach",
+                "type": "cppdbg",
+                "request": "attach",
+                "program": "enter program name, for example ${workspaceRoot}/a.exe",
+                "processId": "${command:pickProcess}",
+                "pipeTransport": {
+                    "debuggerPath": "/usr/bin/gdb",
+                    "pipeProgram": "C:\\Windows\\sysnative\\bash.exe",
+                    "pipeArgs": [],
+                    "pipeCwd": ""
+                }
+            },
+            {
                 "name": "(gdb) Launch",
                 "type": "cppdbg",
                 "request": "launch",
