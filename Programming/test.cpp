@@ -1,7 +1,8 @@
 #include <iostream>
 using namespace std;
 int main(){
-    cout << "Привет!" << endl;
+    setlocale(LC_ALL, "Russian");
+    cout << "Привет vbh!" << endl;
 
     return 0;
 }
