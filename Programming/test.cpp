@@ -1,8 +1,12 @@
 #include <iostream>
 using namespace std;
 int main(){
-    setlocale(LC_ALL, "Russian");
-    cout << "Привет vbh!" << endl;
+    int a[3] = {1,2,3};
+    
+    for(int i = 0; i <= 3; i++){
+        cout << a[i] << endl;
+    }
+
 
     return 0;
 }
