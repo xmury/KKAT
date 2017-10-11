@@ -15,7 +15,13 @@ void task1(){// i know number
           cout << " You win" << endl; break;
       }  
       else{
-          cout << " Error, try again." << endl; i--;
+          if(m > out){
+            cout << " Error, try again. More." << endl; i--;
+          }
+          if(m < out){
+            cout << " Error, try again. Less." << endl; i--;
+          }
+          
       }
     }while(i > 0);
 }
@@ -25,8 +31,8 @@ void task2(){// size displey
     double x,y;
     cout << " Input size displey in inch (duim): "; cin >> x >> y;
     
-    while(x != y++){
-        cout << " inches: " << x << " = centimeters " << x * 2.54;
+    while(x <= y){
+        cout << " inches: " << x << " = centimeters " << x * 2.54 << endl;
         x++;
     }
 }
@@ -34,10 +40,10 @@ void task2(){// size displey
 void task3(){// table of multiplication
     cout << "A task 3" << endl;
     int x;
-    cout << " Input num: " << x;
+    cout << " Input num: "; cin >> x;
 
     for(int i = 1; i <=10; i++){
-        cout << i << " * " << x << " = " << i*x;
+        cout << i << " * " << x << " = " << i*x << endl;
     }
 }
 
@@ -46,7 +52,7 @@ void task4(){// your deposite
     int N, y = 0;
     double x, d = 0;
     
-    int t;
+    double t;
     cout << " Input summ on your deposite: "; cin >> x;
     cout << " How years your deposits? : "; cin >> N; 
     double P; cout << " How percent your devidents? : "; cin >> P;
@@ -54,6 +60,7 @@ void task4(){// your deposite
     while(N >= 1){
         y++; N--; t = (x / 100)*P ;
         cout << "Years passed: " << y << ", your dividents:  " << d << endl;
+        cout << t << " | " << d+t << endl;
         x = x + t; d = d + t;
     }
 
