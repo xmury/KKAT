@@ -247,6 +247,13 @@ void add_task_2(){
     }
 }
 
+int fun(int d, int year){
+    int m = 8, y = year % 100, c = year / 100;
+    int m_n = 2.6 * m - 0.2;
+    int d_w = ( m_n + d + y + (y/4 ) + (c/4) - 2 * c ) % 7;
+    return d_w;
+}
+
 void hard_task(){
     /*День учителя ежегодно отмечается в первое воскресенье октября.
      Дано натуральное число n, обозначающее номер года. 
@@ -265,22 +272,42 @@ void hard_task(){
       номером 11 и 12 предыдущего года); 
       y - две младшие цифры года; 
       c - две старшие цифры года; 
-      [x] - означает целую часть числа x.*/
-    
+      [x] - означает целую часть числа x.*/  
+
     int year; cout << "Input year: "; cin >> year;
-    int y = year % 100;
-    int d_w = 7;   
-    double d;
-    double m = 8.0;  double m_n = 2.6 * m - 0.2; 
-    int c = year / 100;
-
-    cout << m_n << endl;
+    
+    int q = 10, d = 0;
     if ( year >= 1582 && 4902 >= year){
-        d = (d_w + 2 * c) - (m_n + y + (y / 4.0) + (c / 4.0)); 
+        while(q != 0){
+            d++;
+            q = fun(d, year);
+        }
+        switch (d){
+            case 1:
+                cout << "Ticher day by first october" << endl;
+                break;
+            case 2:
+                cout << "Ticher day by second october" << endl;
+                break;
+            case 3:
+                cout << "Ticher day by third october" << endl; 
+                break;
+            case 4:
+                cout << "Ticher day by fourth october" << endl;
+                break;
+            case 5:
+                cout << "Ticher day by fiftth october" << endl;
+                break;
+            case 6:
+                cout << "Ticher day by sixtht october" << endl;
+                break;
+            case 7:
+                cout << "Ticher day by seventh october" << endl;
+                break;
+        }       
     } 
-
-    cout << d << endl;
 }
+
 int main(){
     int a; cout << "Change task: 1, 2, 3, 4; add(5, 6); hard(7): "; cin >> a;
 
