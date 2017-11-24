@@ -187,22 +187,22 @@ void hard_task(){
     int sub = 10;
     int num; cout << "Input num: "; cin >> num;
 
-    int i = 0;
+    int i = 0;                          // Определение длины числа
     while(true){
         if( num % sub == num ){ i++; break; }
         else{ i++; sub *= 10; }
     }
 
-    int ms[i + 1], l = 1; sub = num;
+    i++; int ms[i], l = 1; sub = num;    // Разбиение числа на цифры
     while(i >= l){
         ms[l] = sub % 10;
         sub /= 10;
         l++;    
     }
 
-    l = 1; int add = 0;
+    l = 1; int add = 0; bool f = true;  // Умножение
     while (i >= l){
-        if ( ms[l] >= 5 ) {  l++; }
+        if ( ms[l] >= 5 ) { cout << "nevojmojno" << endl; f = false; break; }
         else { 
             if ( ms[l] * 4 > 9 && l == i ){ 
                 ms[l] = (ms[l] *= 4) % 10 + add;
@@ -223,14 +223,17 @@ void hard_task(){
         }
     }
     
-    l = 1;
-    while (i >= l){
-        cout << ms[l] << endl;
-        l++;
+    if(f){
+        l = i;                              // Цикл вывода информации
+        while (l >= 1){             
+            if(l == i && ms[l] == 0){ l--; continue; }
+            cout << ms[l];
+            l--;
+        }
     }
-    
-
+    cout << endl;
 }
+
 int main(){
     int a; cout << "Change task: 1, 2, 3, 4; add(5, 6); hard(7): "; cin >> a;
 
