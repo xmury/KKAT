@@ -36,7 +36,7 @@ void task_2(){
 
     cout << "- My massive otsortirovan po ubivanuy?" << endl;
     for ( int i = 1; i <= N; i++ ){ 
-        if( i < N && a[i] < a[i+1] ){
+        if( i <= N && a[i] < a[i+1] ){
             cout << "- This is false..." << endl;
             break;
         }
