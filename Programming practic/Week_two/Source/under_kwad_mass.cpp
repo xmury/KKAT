@@ -29,19 +29,17 @@ int main(){
     
     cout << endl;
     // String runer
-    int sub = 0, k = 0;
+    int sub = 0, k = 0, help = 0;
     for ( int x = 0; x <= N; x++){
+        sub = 0;
+        
         int f = 0;
         cout << endl;
         for ( int y = 0; y < M; y++ ) {
-
             if ( A[x][y] <= A[x][y+1] ) {
-                cout << x << " | " << A[0][M];
-                cout << " | " << A[0][M] << endl;
                 sub = A[x][y];
-                A[x][y] = A[x][y+1];
+                help = A[x][y+1]; A[x][y] = help;
                 A[x][y+1] = sub; 
-                
             }
 
             if ( y == (M-1) ) { 
