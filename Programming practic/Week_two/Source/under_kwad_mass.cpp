@@ -3,9 +3,11 @@
 #include <cstdlib>
 
 using namespace std;
-void string_runnner_puzirjek(){
-    /*
-    // String runer
+
+int N = 0, M = 5;                                           // Declare sizes of massiv
+
+
+void sorter_of_bubbles(){
     int sub = 0, k = 0, help = 0;
     for ( int x = 0; x <= N; x++){
         sub = 0;
@@ -25,38 +27,25 @@ void string_runnner_puzirjek(){
             if ( y == (M-1) && f < M ) { y = -1; }
         }
     }
-    */
 }
-int main(){
-    /*
-    Отсортировать строки массива целых чисел по убыванию.
-    */
 
-    // Generator
-    srand (time(NULL)); 
-    int N = 0, M = 5;
-    int A[N][M];
+int generator(int range){
+    int A[N][M];                                            // Declare kwad massiv
+    srand (time(NULL));
     for ( int i = 0; i <= N; i++ ) {
         for ( int ii = 0; ii <= M; ii++ ) {
-            A[i][ii] = rand() % 8 +1;
+            A[i][ii] = rand() % range + 1;
         }
     }
-    
-    cout << endl;
-    // String runer
+    return A;
+}
+
+void sorte_of_inserts(){
     int sub = 0, k = 0, help = 0;
     for ( int x = 0; x <= N; x++){
         sub = 0; int f = 0; cout << endl;
         k = 0;
         while ( k < M ) {
-            cout << endl; // Printer
-            for ( int xx = 0; xx <= N; xx++ ) {
-                for ( int yy = 0; yy <= M; yy++ ) {
-                    cout << A[xx][yy] << " | ";
-                }
-                cout << endl;
-            }
-
             for ( int y = k + 1; y <= M; y++ ) {
                 if ( A[x][k] <= A[x][y] ) {
                     sub = A[x][k];
@@ -64,20 +53,34 @@ int main(){
                     A[x][y] = sub;
                 }
             }
-            k++;
+            k++; 
         }
     }
-    
-    cout << "----------------------------" << endl;
-    // Printer
+}
+
+void printer(){
     for ( int x = 0; x <= N; x++ ) {
         for ( int y = 0; y <= M; y++ ) {
             cout << A[x][y] << " | ";
         }
         cout << endl;
     }
+}
+int main(){
+    /*
+    Отсортировать строки массива целых чисел по убыванию.
+    */
 
-    cout << endl;
+    int A = generator( 9 );                                     // Generator
+
+    printer();                                                  // Printer
+
+    sorte_of_inserts();                                         // Sort
+
+    printer();                                                  // Printer
+
+
+    cout << endl;                                               //Check
     cout << A[0][5] << endl;
     cout << A[1][5] << endl;
 
