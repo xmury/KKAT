@@ -62,7 +62,12 @@
     <script type="text/javascript">
         coins = 0; team = 0; score = 0; 
         score1 = 0; score2 = 0;
+
         function send(){
+            if (coins != 0) document.getElementById(coins).style.background = '';
+            if (team != 0) document.getElementById(team).style.background = '';
+            if (score != 0) document.getElementById(score).style.background = '';
+
             if (coins == 0 || team == 0 || score == 0){
                 return false;
             }
@@ -87,9 +92,7 @@
                     score2 -= point;
                 }
             }
-            document.getElementById(coins).style.background = '#f5f5f5';
-            document.getElementById(team).style.background = '#f5f5f5';
-            document.getElementById(score).style.background = '#f5f5f5';
+
 
             coins = 0; team = 0; score = 0; 
             
