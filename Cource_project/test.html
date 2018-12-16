@@ -1,0 +1,9 @@
+<script type="text/javascript">
+    function hotkey(event) {
+      var id = event.keyCode;
+      document.getElementById("key").innerHTML = id;
+    }
+  </script>
+  <body onkeyup="hotkey(event)">
+    <div id="key"></div>
+  </body>
