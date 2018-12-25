@@ -87,17 +87,29 @@ class Application(tk.Frame):
         self.pause.grid(column=4 , row=5, padx=5 , pady=5)
 
     # Не оптимально, но быстро
-    def score1_add1(self): self.score1 += 1; self.score1T['text'] = self.score1
-    def score1_add2(self): self.score1 += 2; self.score1T['text'] = self.score1
-    def score1_add3(self): self.score1 += 3; self.score1T['text'] = self.score1
+    def score1_add1(self): 
+        if self.timer_on == True:
+            self.score1 += 1; self.score1T['text'] = self.score1
+    def score1_add2(self): 
+        if self.timer_on == True:
+            self.score1 += 2; self.score1T['text'] = self.score1
+    def score1_add3(self): 
+        if self.timer_on == True:
+            self.score1 += 3; self.score1T['text'] = self.score1
     def score1_min1(self): 
         if self.score1 > 0: 
             self.score1 +=-1
             self.score1T['text'] = self.score1
     
-    def score2_add1(self): self.score2 += 1; self.score2T['text'] = self.score2
-    def score2_add2(self): self.score2 += 2; self.score2T['text'] = self.score2
-    def score2_add3(self): self.score2 += 3; self.score2T['text'] = self.score2
+    def score2_add1(self): 
+        if self.timer_on == True:
+            self.score2 += 1; self.score2T['text'] = self.score2
+    def score2_add2(self): 
+        if self.timer_on == True:
+            self.score2 += 2; self.score2T['text'] = self.score2
+    def score2_add3(self): 
+        if self.timer_on == True:
+            self.score2 += 3; self.score2T['text'] = self.score2
     def score2_min1(self): 
         if self.score2 > 0: 
             self.score2 +=-1
@@ -109,11 +121,13 @@ class Application(tk.Frame):
             self.timer_on = False
 
     def roadAdd(self):
-        if self.road == 9: self.roadT['text'] = 'Период: ' + str(1); self.road = 1
-        else:  self.road += 1; self.roadT['text'] = 'Период: ' + str(self.road)
+        if self.timer_on == True:
+            if self.road == 9: self.roadT['text'] = 'Период: ' + str(1); self.road = 1
+            else:  self.road += 1; self.roadT['text'] = 'Период: ' + str(self.road)
     def roadMin(self):
-        if self.road == 1: self.roadT['text'] = 'Период: ' + str(9); self.road = 9
-        else:  self.road -= 1; self.roadT['text'] = 'Период: ' + str(self.road)
+        if self.timer_on == True:        
+            if self.road == 1: self.roadT['text'] = 'Период: ' + str(9); self.road = 9
+            else:  self.road -= 1; self.roadT['text'] = 'Период: ' + str(self.road)
 
     def timer(self):
         if self.timer_on == True:
