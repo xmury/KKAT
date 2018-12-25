@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Табло</title>
+    <!-- Стиль табло -->
+    <style>
+        h1, h2 {
+            font-size: 2vw;
+        }
+        td {
+            padding: 5px;`
+        }
+        html, body, .container {
+            height: 99%;
+        }
+        div {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: nowrap;
+        }
+        .team_score {
+            align-items: center;
+            border-bottom: 2px solid black;
+            height: 10%;
+        }
+
+        .score_button {
+            width: 48%;
+            height: 100%;
+        }
+
+        .calckey {
+            width: 30%;
+            height: 30%;
+        }
+
+        .team_calc {
+            width: 15%;
+            height: 100%;
+        }
+        .calc_key {
+            width: 70%;
+            flex-wrap: wrap;
+            align-content: space-around;
+        }
+
+        .cl_score_button {
+            height: 10%;
+        }
+
+        .calc {
+            height: 60%;
+        }
+
+        button {
+            background: #f5f5f5;
+        }
+    </style>    
+    <!-- Стиль Меню выбора -->
+    <style>                 
+        #game_type {
+            font-size: 3vw;
+            align-items: center;
+        }
+        .game {
+            flex-direction: row;
+            height: 7%;
+        }
+        #foot, #basket, #volley {
+            font-size: 2vw;
+            width: 30%;
+            height: 100%;
+        }
+        
+        #test {
+            flex-direction: column;
+            height: 79%;
+        }
+    </style>
+    <script type="text/javascript">
+        coins = 0; team = 0; score = 0; 
+        score1 = 0; score2 = 0;
+
+        function send(){
+            if (coins != 0) document.getElementById(coins).style.background = '';
+            if (team != 0) document.getElementById(team).style.background = '';
+            if (score != 0) document.getElementById(score).style.background = '';
+
+            if (coins == 0 || team == 0 || score == 0){
+                return false;
+            }
+            point = coins - 48;
+            if (score == 38) {
+                if (team == 37){
+                    console.log(`Добавить команде 1: ${point} `);
+                    score1 += point;
+                }
+                else {
+                    console.log(`Добавить команде 2: ${point} `);
+                    score2 += point;
+                }
+            }
+            else {
+                if (team == 37){
+                    console.log(`Отнять у команды 1: ${point} `);
+                    score1 -= point;
+                }
+                else {
+                    console.log(`Отнять у команды 2: ${point} `);
+                    score2 -= point;
+                }
+            }
+
+
+            coins = 0; team = 0; score = 0; 
+            
+            document.getElementById('score').innerHTML = `${score1} : ${score2}`;
+        }
+
+        function new_coins(num){
+            if (coins != 0)  document.getElementById(coins).style.background = '#f5f5f5';
+            document.getElementById(num).style.background = '#faeedd';
+            coins = num;
+        }
+
+        function new_team(num){
+            if (team != 0)  document.getElementById(team).style.background = '#f5f5f5';
+            document.getElementById(num).style.background = '#faeedd';
+            team = num;
+        }
+
+        function new_score(num){
+            if (score != 0)  document.getElementById(score).style.background = '#f5f5f5';
+            document.getElementById(num).style.background = '#faeedd';
+            score = num;
+        }
+
+        document.onkeydown = function(e) {
+            if (e.keyCode == 97  || e.keyCode == 49) { new_coins(49); }
+            if (e.keyCode == 98  || e.keyCode == 50) { new_coins(50); }
+            if (e.keyCode == 99  || e.keyCode == 51) { new_coins(51); }
+            if (e.keyCode == 100 || e.keyCode == 51) { new_coins(52); }
+            if (e.keyCode == 101 || e.keyCode == 52) { new_coins(53); }
+            if (e.keyCode == 102 || e.keyCode == 53) { new_coins(54); }
+            if (e.keyCode == 103 || e.keyCode == 54) { new_coins(55); }
+            if (e.keyCode == 104 || e.keyCode == 55) { new_coins(56); }
+            if (e.keyCode == 105 || e.keyCode == 56) { new_coins(57); }
+
+            if (e.keyCode == 37) {  new_team(37); }
+            if (e.keyCode == 39) {  new_team(39); }
+
+            if (e.keyCode == 38) { new_score(38); }
+            if (e.keyCode == 40) { new_score(40); }
+
+            if (e.keyCode == 13) { send(); }
+        }
+    </script>
+    <script>
+        function get_foot(){
+            document.body.removeChild(document.body.children[0]);
+            document.body.removeChild(document.body.children[0]);
+            
+            document.getElementById('test').innerHTML = footbal;
+        }
+    </script>
+</head>
+<body>
+   
+    <div id="game_headline">
+        <h1 id="game_type">Выбор игры</h1>
+    </div>
+    <div id="game_menu" class="game">
+        <button id="foot"   class="calckey" onclick=  "get_foot()"> Футбол    </button> 
+        <button id="basket" class="calckey" onclick="get_basket()"> Баскетбол </button> 
+        <button id="volley" class="calckey" onclick="get_volley()"> Волейбол  </button> 
+    </div>
+    <div id="test">
+        
+    </div>
+</body>
+    <script>
+        footbal = `
+<div class="team_score">
+    <h2 id='team1'>Команда 1</h2> 
+    <h1 id='score'>0:0</h1>
+    <h2 id='team2'>Команда 2</h2>
+</div>   
+
+<div class = "calc">
+    <button id='37' class="team_calc" onclick="new_team(37)">Команда 1</button>
+    <div class="calc_key">
+        <button id="49" class="calckey" onclick="new_coins(49)">1</button> 
+        <button id="50" class="calckey" onclick="new_coins(50)">2</button> 
+        <button id="51" class="calckey" onclick="new_coins(51)">3</button> 
+
+        <button id="52" class="calckey" onclick="new_coins(52)">4</button> 
+        <button id="53" class="calckey" onclick="new_coins(53)">5</button> 
+        <button id="54" class="calckey" onclick="new_coins(54)">6</button> 
+
+        <button id="55" class="calckey" onclick="new_coins(55)">7</button> 
+        <button id="56" class="calckey" onclick="new_coins(56)">8</button> 
+        <button id="57" class="calckey" onclick="new_coins(57)">9</button> 
+    </div>
+    <button id='39' class="team_calc" onclick="new_team(39)">Команда 2</button>
+</div>
+<div class="cl_score_button">
+    <button id="38" class="score_button" onclick="new_score(38)">Добавить (+)</button>
+    <button id="40" class="score_button" onclick="new_score(40)">Отнять (-)</button>
+</div>
+<div style="height: 7%;">
+    <button id="13" class="score_button" onclick="send()">Отправить</button>
+</div>
+            `
+    </script>
+</html> 
