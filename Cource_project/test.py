@@ -7,7 +7,11 @@ class Application(tk.Frame):
     timer_on = False
     score1 = 0
     score2 = 0
-    road = 0
+    road = 1
+    test = None
+
+    secundes = 0 
+    minutes  = 0
 
     def __init__(self, master=None):
         tk.Frame.__init__(self, master)
@@ -22,19 +26,23 @@ class Application(tk.Frame):
         self.now.set('00:00')
         self.timer()
 
-        self.load =     tk.Button(self , text='Загрузить игру')
-        self.save =     tk.Button(self , text='Сохранить игру')
-        self.roadT =     tk.Button(self , text='Период: 0')
-        self.roadAddT =  tk.Button(self , text='+', command=self.roadAdd)
-        self.roadMinT =  tk.Button(self , text='-', command=self.roadMin)
-        self.score1T =  tk.Button(self , text='0')
-        self.score2T =  tk.Button(self , text='0')
-        self.arrow1 =   tk.Button(self , text='>')
-        self.arrow2 =   tk.Button(self , text='<')
+        self.getSerial =    tk.Text(self, height=1,width=20, font='Arial 10')
+        self.serialStartT = tk.Button(self , text='COM', command=self.serialStart)
+
+        self.save =         tk.Button(self , text='Сохранить игру')
+        self.roadT =        tk.Button(self , text='Период: 1')
+        self.roadAddT =     tk.Button(self , text='+', command=self.roadAdd)
+        self.roadMinT =     tk.Button(self , text='-', command=self.roadMin)
+        self.score1T =      tk.Button(self , text='0')
+        self.score2T =      tk.Button(self , text='0')
+        self.arrow1 =       tk.Button(self , text='>')
+        self.arrow2 =       tk.Button(self , text='<')
 
         self.time_b.grid(column=3 , row=2, columnspan=3)
         
-        self.load.grid(  column=0 , row=0, columnspan=2, padx=5 , pady=5)
+        self.serialStartT.grid(  column=2 , row=0, padx=5 , pady=5)
+        self.getSerial.grid(     column=0 , row=0, padx=5 , pady=5, columnspan=2)
+
         self.save.grid(  column=7 , row=0, columnspan=2, padx=5 , pady=5)
         self.roadT.grid(  column=4 , row=0,               padx=5 , pady=5)
         self.roadAddT.grid(column=3 ,row=0)
@@ -110,22 +118,60 @@ class Application(tk.Frame):
     def timer(self):
         if self.timer_on == True:
             self.time += 1
-            secundes = self.time % 60
-            minutes = math.floor(self.time / 60 % 60)
+            self.secundes = self.time % 60
+            self.minutes = math.floor(self.time / 60 % 60)
 
-            if minutes < 10:
-                time_f = "0" + str(minutes) + " : "
+            if self.minutes < 10:
+                time_f = "0" + str(self.minutes) + " : "
             else:
-                time_f = str(minutes) + " : "
+                time_f = str(self.minutes) + " : "
 
-            if secundes < 10:
-                time_f += "0" + str(secundes)
+            if self.secundes < 10:
+                time_f += "0" + str(self.secundes)
             else:
-                time_f += str(secundes)
+                time_f += str(self.secundes)
 
             print(time_f)
             self.now.set(time_f)
+
+            # Отправка на табло значений
+            if self.test != None: self.send()
         self.after(1000, self.timer)
+
+    def serialStart(self):
+        text = self.getSerial.get('1.0', '10.0')
+        text = text.rstrip()
+        print(len(text))
+        self.test = serialDriver(text)
+        self.test.open()
+        
+        self.send()
+
+    def send(self):
+        # /dev/ttyACM3
+        # S100X100X1X60X59
+        text = 'S'
+        # score1
+        if   self.score1 > 99:  text +=        str(self.score1)
+        elif self.score1 > 9:   text += '0'  + str(self.score1)
+        else:                   text += '00' + str(self.score1)
+        text += 'X'
+        # score2
+        if   self.score2 > 99:  text +=        str(self.score2)
+        elif self.score2 > 9:   text += '0'  + str(self.score2)
+        else:                   text += '00' + str(self.score2)
+        # road
+        text += 'X' + str(self.road) + 'X'
+        # minutes
+        if   self.minutes > 9:  text +=        str(self.minutes)
+        else:                   text += '0'  + str(self.minutes)
+        text += 'X'        
+        # secundes
+        if   self.secundes > 9: text +=        str(self.secundes)
+        else:                   text += '0'  + str(self.secundes)
+
+        print(text)
+        self.test.write(text)
 
 root = tk.Tk()
 root.geometry()
