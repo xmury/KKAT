@@ -31,7 +31,6 @@ class board_gui(board_fun):
         layout.add_widget(self.add_team_widget(self.team1))
         layout.add_widget(self.add_tablo())
         layout.add_widget(self.add_team_widget(self.team2))
-
         Clock.schedule_interval(self.timer, 1)
 
         return layout

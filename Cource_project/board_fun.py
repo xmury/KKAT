@@ -1,6 +1,8 @@
 from kivy.app import App
 from serialDriver import serialDriver
 import math
+import serial
+
 
 class board_fun(App):
     time = 0
@@ -41,11 +43,11 @@ class board_fun(App):
 
     def score_min1(self, instance): 
         if self.team1['minus'] == instance:
-            if self.score1 > 0: 
+            if self.score1 > 0 and self.timer_on == True: 
                 self.score1 +=-1
                 self.team1['l_score'].text = str(self.score1)
         else:
-            if self.score2 > 0: 
+            if self.score2 > 0 and self.timer_on == True: 
                 self.score2 +=-1
                 self.team2['l_score'].text = str(self.score2)
 
@@ -60,6 +62,9 @@ class board_fun(App):
 
     def timer(self, incom):
         if self.timer_on == True:
+            if (self.time == 0):
+                self.serialStart() 
+
             self.time += 1
             self.secundes = self.time % 60
             self.minutes = math.floor(self.time / 60 % 60)
@@ -87,13 +92,11 @@ class board_fun(App):
             self.timer_on = False
 
     def serialStart(self):
-        text = self.getSerial.get('1.0', '10.0')
-        text = text.rstrip()
-        print(text)
-        self.serial_enable = serialDriver(text)
+        self.serial_enable = serialDriver()
         self.serial_enable.open()
         
         self.send()
+                    
 
     def send(self):
         # /dev/ttyACM3
