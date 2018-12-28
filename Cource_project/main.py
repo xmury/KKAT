@@ -8,6 +8,21 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 
+from kivy.uix.image import Image
+from kivy.core.window import Window
+from kivy.properties import StringProperty
+
+class MyLabel(Image):
+    # https://stackoverrun.com/ru/q/13108579 
+    text = StringProperty('') 
+
+    def on_text(self, *_): 
+        l = Label(text=self.text) 
+        l.font_size = '1000dp' 
+        l.texture_update() 
+        
+        self.texture = l.texture 
+
 class board_gui(board_fun):
     team_num = 1
 
@@ -19,31 +34,35 @@ class board_gui(board_fun):
 
         Clock.schedule_interval(self.timer, 1)
 
-        print(self.team1)
         return layout
         
     def add_team_widget(self, team):
         master = BoxLayout(orientation='vertical')
 
-        team['l_team']  = Label(text='Команда ' + str(self.team_num), font_size='60')
+        team['l_team']  = MyLabel(text='  Команда ' + str(self.team_num) + '  ')#, #font_size='50', size_hint=(1,.4))
         self.team_num += 1
+        # MyLabel(text='Test test test')
         
-        team['l_score'] = Label(text='0', font_size='250')
+        slave2 = BoxLayout(orientation='vertical', padding = 20)
+        team['l_score'] = MyLabel(text='0')
+        team['test'] = Label(text='   ', size_hint=(1,.5))
+        slave2.add_widget(team['l_score'])
 
-        team['minus'] = Button(on_press=self.score_min1 ,text = "-1")
+        team['minus'] = Button(on_press=self.score_min1 ,text = "-1", size_hint=(1,.4))
         
-        slave = BoxLayout(orientation='horizontal')
+        slave1 = BoxLayout(orientation='horizontal', size_hint=(1,.4))
 
         team['add1']  = Button(on_press=self.score_add1 ,text = "+1")
         team['add2']  = Button(on_press=self.score_add2 ,text = "+2")
         team['add3']  = Button(on_press=self.score_add3 ,text = "+3")
-        slave.add_widget(team['add1'])
-        slave.add_widget(team['add2'])
-        slave.add_widget(team['add3'])
+        slave1.add_widget(team['add1'])
+        slave1.add_widget(team['add2'])
+        slave1.add_widget(team['add3'])
 
         master.add_widget(team['l_team'] )
-        master.add_widget(team['l_score'])
-        master.add_widget(slave)
+        master.add_widget(slave2)
+        master.add_widget(team['test'] )
+        master.add_widget(slave1)
         master.add_widget(team['minus'])
 
         return master
@@ -51,21 +70,21 @@ class board_gui(board_fun):
     def add_tablo(self):
         master = BoxLayout(orientation='vertical')
 
-        self.tablo['l_road_text'] = Label(text='Период', font_size='50')        
+        self.tablo['l_road_text'] = MyLabel(text='   Период   ')#, font_size='50')        
 
         slave1 = BoxLayout(orientation='horizontal')
 
-        self.tablo['plus']   = Button(on_press=self.roadAdd ,text = "+")
-        self.tablo['l_road'] = Label(text='1', font_size='150')        
-        self.tablo['minus']  = Button(on_press=self.roadMin ,text = "-")
+        self.tablo['plus']   = Button(on_press=self.roadAdd ,text = "+", size_hint=(.4,1))
+        self.tablo['l_road'] = MyLabel(text=' 1 ')#, font_size='150', size_hint=(1,1))        
+        self.tablo['minus']  = Button(on_press=self.roadMin ,text = "-", size_hint=(.4,1))
 
         slave1.add_widget(self.tablo['plus'])
         slave1.add_widget(self.tablo['l_road'])
         slave1.add_widget(self.tablo['minus'])
 
-        self.tablo['l_timer'] = Label(text='00:00', font_size='50')        
+        self.tablo['l_timer'] = MyLabel(text=' 00:00 ')#, font_size='50')        
 
-        slave2 = BoxLayout(orientation='horizontal')
+        slave2 = BoxLayout(orientation='horizontal', size_hint=(1,.4))
         self.tablo['pause'] = Button(on_press=self.timer_pause ,text = "Пауза")
         self.tablo['start'] = Button(on_press=self.timer_start ,text = "Старт")
 
